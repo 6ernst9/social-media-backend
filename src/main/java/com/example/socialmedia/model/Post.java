@@ -8,6 +8,8 @@ public class Post {
     private String location;
     private String description;
     private int views;
+
+    private Long userId;
     private ArrayList<String> likes;
     private ArrayList<Comment> comments;
 }
