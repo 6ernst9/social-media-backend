@@ -6,20 +6,20 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "Comments")
+@Table(name = "StoryArchive")
 @Data
-public class Comment {
+public class StoryArchive {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int postId;
-    private String text;
-    private Timestamp commentTime;
-    private int likes;
+    private int userId;
+    private Timestamp storyTime;
+    private String photo;
+    private int reactions;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

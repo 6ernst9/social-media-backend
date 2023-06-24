@@ -1,35 +1,27 @@
 package com.example.socialmedia.model;
 
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
+@Table(name = "Messages")
+@Data
 public class Message {
-    private final String sender;
-    private final String receiver;
-    private final String content;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private int senderId;
+    private int receiverId;
+    private String content;
     private boolean isLiked;
 
-    public Message(String sender, String receiver, String content) {
-        this.sender = sender;
-        this.receiver = receiver;
-        this.content = Encryption.encrypt(content);
-        this.isLiked = false;
-    }
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
 
-    public String getSender() {
-        return sender;
-    }
+    @ManyToOne
+    @JoinColumn(name = "receiver_id")
+    private User receiver;
 
-    public String getReceiver() {
-        return receiver;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public boolean isLiked() {
-        return isLiked;
-    }
-
-    public void setLiked(boolean liked) {
-        isLiked = liked;
-    }
 }
