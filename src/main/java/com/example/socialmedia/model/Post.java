@@ -1,15 +1,26 @@
 package com.example.socialmedia.model;
 
-import java.util.ArrayList;
+import jakarta.persistence.*;
+import lombok.Data;
 
+import java.sql.Timestamp;
+
+@Entity
+@Table(name = "Posts")
+@Data
 public class Post {
-    private ArrayList<String> photos;
-    private String postTime;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private int userId;
+    private String photo;
+    private Timestamp postTime;
     private String location;
     private String description;
     private int views;
 
-    private Long userId;
-    private ArrayList<String> likes;
-    private ArrayList<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

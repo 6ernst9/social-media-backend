@@ -3,20 +3,20 @@ package com.example.socialmedia.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Timestamp;
-
 @Entity
-@Table(name = "Comments")
+@Table(name = "PostArchive")
 @Data
-public class Comment {
+public class PostArchive {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private int userId;
     private int postId;
-    private String text;
-    private Timestamp commentTime;
-    private int likes;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
